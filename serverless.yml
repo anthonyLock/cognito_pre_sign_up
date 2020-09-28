@@ -1,0 +1,26 @@
+service: alCognitoPreSignUpTest
+
+provider:
+  name: aws
+  runtime: go1.x
+  region: eu-west-2
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "cognito-idp:ListUsers"
+        - "cognito-idp:AdminLinkProviderForUser"
+      Resource:
+        - "arn:aws:cognito-idp:eu-west-2:978472575853:userpool/eu-west-2_OMpBk7fwH"
+
+package:
+  exclude:
+    - ./**
+  include:
+  - ./bin/**
+
+
+functions:
+  PreSignUpTest:
+    handler: bin/presignup
+    timeout: 30 # seconds
+    memorySize: 128 # MB
